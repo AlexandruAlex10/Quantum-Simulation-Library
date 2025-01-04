@@ -78,3 +78,30 @@ CNOT_2q = np.array(
      [0, 0, 0, 1],
      [0, 0, 1, 0]], dtype=complex
 )
+
+# CNOT Gate (Controlled-X) for n qubits and m control qubits
+def CNOT_nq(n, control, target):
+    if target in control:
+        raise ValueError("Target qubit cannot be one of the control qubits.")
+
+    # Number of states in the system (2^n)
+    num_states = 2 ** n
+
+    # Initialize the identity matrix for the n-qubit system
+    cnot_matrix = np.eye(num_states, dtype=complex)
+
+    # Iterate through all possible basis states
+    for i in range(num_states):
+        binary = list(f"{i:0{n}b}")  # Binary representation of the state
+        
+        # Check if all control qubits are in the |1> state
+        if all(binary[ctrl] == "1" for ctrl in control):
+            # Flip the target qubit
+            binary[target] = "1" if binary[target] == "0" else "0"
+            j = int("".join(binary), 2)  # Convert modified binary back to an integer
+            
+            # Swap the rows in the matrix
+            cnot_matrix[i, i], cnot_matrix[i, j] = 0, 1
+            cnot_matrix[j, j], cnot_matrix[j, i] = 0, 1
+
+    return cnot_matrix
