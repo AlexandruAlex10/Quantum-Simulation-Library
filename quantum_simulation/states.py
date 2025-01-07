@@ -2,6 +2,7 @@ import numpy as np
 
 ket_0 = np.array([1, 0], dtype=complex)
 ket_1 = np.array([0, 1], dtype=complex)
+
 ket_plus = (ket_0 + ket_1) / np.sqrt(2)
 ket_minus = (ket_0 - ket_1) / np.sqrt(2)
 
