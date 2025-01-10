@@ -1,29 +1,7 @@
 import numpy as np
 
-def Rx(theta):
-    return np.array(
-        [[np.cos(theta / 2), -1j * np.sin(theta / 2)],
-         [-1j * np.sin(theta / 2), np.cos(theta / 2)]], dtype=complex
-    )
-
-def Ry(theta):
-    return np.array(
-        [[np.cos(theta / 2), -np.sin(theta / 2)],
-         [np.sin(theta / 2), np.cos(theta / 2)]], dtype=complex
-    )
-
-def Rz(theta):
-    return np.array(
-        [[np.exp(-1j * theta / 2), 0],
-         [0, np.exp(1j * theta / 2)]], dtype=complex
-    )
-
-def Ph(phi):
-    return np.array(
-        [[1, 0],
-         [0, np.exp(1j * phi)]], dtype=complex
-    )
-
+# [CONSTANTS]
+# Hadamard Gate
 H = 1/np.sqrt(2) * np.array(
     [[1,  1],
      [1, -1]], dtype=complex
@@ -66,6 +44,35 @@ CNOT_2q = np.array(
      [0, 0, 1, 0]], dtype=complex
 )
 
+# Rx Gate (Rotation around X-axis)
+def Rx(theta):
+    return np.array(
+        [[np.cos(theta / 2), -1j * np.sin(theta / 2)],
+         [-1j * np.sin(theta / 2), np.cos(theta / 2)]], dtype=complex
+    )
+
+# Ry Gate (Rotation around Y-axis)
+def Ry(theta):
+    return np.array(
+        [[np.cos(theta / 2), -np.sin(theta / 2)],
+         [np.sin(theta / 2), np.cos(theta / 2)]], dtype=complex
+    )
+
+# Rz Gate (Rotation around Z-axis)
+def Rz(theta):
+    return np.array(
+        [[np.exp(-1j * theta / 2), 0],
+         [0, np.exp(1j * theta / 2)]], dtype=complex
+    )
+
+# Ph Gate (Phase Gate)
+def Ph(phi):
+    return np.array(
+        [[1, 0],
+         [0, np.exp(1j * phi)]], dtype=complex
+    )
+
+# CNOT Gate (Controlled-X) for n qubits and m control qubits
 def CNOT_nq(n, control, target):
     if target in control:
         raise ValueError("Target qubit cannot be one of the control qubits.")
