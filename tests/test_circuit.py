@@ -40,6 +40,7 @@ class TestQuantumSimulationCircuit(unittest.TestCase):
         expected_state = np.array([0, 1], dtype=complex)  # |1> state
         self.assertTrue(np.allclose(qc.state, expected_state))
     
+    # is not working entirely
     def test_full_simulation(self):
         # simple Hadamard and Controlled-Not Gates circuit and simulate it
         qc = QuantumCircuit(num_qubits=3)
