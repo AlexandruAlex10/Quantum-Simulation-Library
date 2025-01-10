@@ -9,3 +9,5 @@
 [5]     QCinPY, https://www.kattemolle.com/other/QCinPY.html
 
 [6]     ArjanCodes, 2023-Package, https://github.com/ArjanCodes/2023-package
+
+[7]     Quanta Guru, Introductory Quantaum Computing,https://q4quanta.github.io/qcdocs/gates/cnot/cnot/
