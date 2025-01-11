@@ -9,7 +9,6 @@ from quantum_simulation.gates import *
 from quantum_simulation.circuit import QuantumCircuit
 from quantum_simulation.measurements import *
 
-
 class TestQuantumSimulationMeasurements(unittest.TestCase):
     #  define a quantum circuit made of one qubit, one bit for measurement and an X-gate. Measure the state
     def test_measurement(self):
@@ -38,5 +37,6 @@ class TestQuantumSimulationMeasurements(unittest.TestCase):
         qc.simulate()
         expected_result =  np.array([0, 1, 0, 0, 0, 0, 0, 0 ], dtype=complex)
         self.assertTrue(np.allclose(post_measurement_state(qc.state, 1), expected_result))
+
 if __name__ == "__main__":
     unittest.main()

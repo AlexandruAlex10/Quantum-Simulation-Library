@@ -1,48 +1,50 @@
 import numpy as np
 
 # [CONSTANTS]
+
 # Hadamard Gate
 H = 1/np.sqrt(2) * np.array(
     [[1,  1],
      [1, -1]], dtype=complex
 )
 
+# T Gate
 T = np.array(
     [[1, 0],
      [0, np.exp(1j * np.pi / 4)]], dtype=complex
 )
 
+# S Gate
 S = np.array(
     [[1, 0],
      [0, 1j]], dtype=complex
 )
 
+# Identity Gate
 I = np.array(
     [[1, 0],
      [0, 1]], dtype=complex
 )
 
+# Pauli-X Gate
 X = np.array(
     [[0, 1],
      [1, 0]], dtype=complex
 )
 
+# Pauli-Y Gate
 Y = np.array(
     [[0, -1j],
      [1j, 0]], dtype=complex
 )
 
+# Pauli-Z Gate
 Z = np.array(
     [[1, 0],
      [0, -1]], dtype=complex
 )
 
-CNOT_2q = np.array(
-    [[1, 0, 0, 0],
-     [0, 1, 0, 0],
-     [0, 0, 0, 1],
-     [0, 0, 1, 0]], dtype=complex
-)
+# [FUNCTIONS]
 
 # Rx Gate (Rotation around X-axis)
 def Rx(theta):
@@ -65,7 +67,7 @@ def Rz(theta):
          [0, np.exp(1j * theta / 2)]], dtype=complex
     )
 
-# Ph Gate (Phase Gate)
+# Phase Gate
 def Ph(phi):
     return np.array(
         [[1, 0],
@@ -73,7 +75,7 @@ def Ph(phi):
     )
 
 # CNOT Gate (Controlled-X) for n qubits and m control qubits
-def CNOT_nq(n, control, target):
+def CNOT(n, control, target):
     if target in control:
         raise ValueError("Target qubit cannot be one of the control qubits.")
 

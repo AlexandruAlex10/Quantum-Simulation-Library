@@ -1,6 +1,5 @@
 import numpy as np
 from .measurements import measure
-from .gates import I
 
 class QuantumCircuit:
     """
@@ -29,6 +28,7 @@ class QuantumCircuit:
         quantum circuit. It takes two parameters: `gate` which represents the quantum gate to be
         applied, and `qubits` which specifies the qubits on which the gate will act.
         """
+        
         self.gates.append((gate, qubits))
     
     def delete_gate(self, gate, qubits):
@@ -38,32 +38,40 @@ class QuantumCircuit:
         parameters: `gate`, which represents the quantum gate to be removed, and `qubits`, which
         specifies the qubits on which the gate was intended to act.
         """
+
         if (gate, qubits) in self.gates:
             self.gates.remove((gate, qubits))
 
     def apply_gate(self, gate, qubits):
-        
         """
         The `apply_gate` method in the `QuantumCircuit` class is responsible for applying a
         specified quantum gate operation to the quantum state vector of the circuit.
         """
+
         full_gate = self.expand_gate(gate, qubits)
-        # matrix multiplication in numpy
-        self.state = full_gate @ self.state
+        self.state = full_gate @ self.state # Matrix multiplication in numpy
 
     def expand_gate(self, gate, qubits):
         """
-        The `expand_gate` method in the `QuantumCircuit` class is responsible for creating the full
-        gate matrix that acts on all qubits in the quantum circuit based on the specified gate and
-        qubits. 
+        The `expand_gate` method creates the full gate matrix that acts on all qubits.
+        If the gate is already of size 2^n x 2^n, it skips expansion.
         """
+
         num_qubits = self.num_qubits
+        dim = 2**num_qubits
+
+        if gate.shape == (dim, dim): # If the gate is already full-sized, return it directly
+            return gate
+
+        identity = np.eye(2, dtype=complex)
         full_gate = 1
+
         for i in range(num_qubits):
             if i in qubits:
                 full_gate = np.kron(full_gate, gate)
             else:
-                full_gate = np.kron(full_gate, I)
+                full_gate = np.kron(full_gate, identity)
+
         return full_gate
 
     def simulate(self):
@@ -74,6 +82,7 @@ class QuantumCircuit:
         gates, it returns the final quantum state vector representing the result of simulating the
         quantum circuit up to that point.
         """
+        
         for gate, qubits in self.gates:
             self.apply_gate(gate, qubits)
         return self.state

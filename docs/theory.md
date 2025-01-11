@@ -10,4 +10,4 @@
 
 [6]     ArjanCodes, 2023-Package, https://github.com/ArjanCodes/2023-package
 
-[7]     Quanta Guru, Introductory Quantaum Computing,https://q4quanta.github.io/qcdocs/gates/cnot/cnot/
+[7]     Quanta Guru, Introductory Quantum Computing, https://q4quanta.github.io/qcdocs/gates/cnot/cnot/

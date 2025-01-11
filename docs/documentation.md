@@ -9,7 +9,6 @@ The project is made of:
     - "docs" folder: in here you can find references to the theory that was used in implementing this project and also explanations about the implementation itself.
     - "quantum_simulation" folder: the actual code implementation of the project, consisting of a couple of different files, each having its own purpose.
     - "tests" folder: some tests were implemented in order to check that the code implementation was done correctly. 
-    - "examples" folder: some applications resulted from implementing the project.
     - other useful files.
 
 Quantum Simulation Library contains:
@@ -21,6 +20,9 @@ Quantum Simulation Library contains:
         -> add_gate: add a gate to the circuit.
                     parameters: gate (np.ndarray): The gate matrix.
                                 qubits (list[int]): The indices of qubits the gate acts on.
+        -> delete_gate: remove a gate from the circuit
+                    parameters: gate (np.ndarray): The gate matrix.
+                                qubits (list[int]): The indices of qubits the gate acted on.
         -> apply_gate: apply a gate to the current state.
                     parameters: gate (np.ndarray): The gate matrix.
                                 qubits (list[int]): The indices of qubits the gate acts on.
@@ -47,9 +49,8 @@ Quantum Simulation Library contains:
         -> X (Pauli-X Gate): a single-qubit gate equivalent to a classical NOT gate (flips ∣0⟩ to ∣1⟩ and vice versa).
         -> Y (Pauli-Y Gate): a single-qubit gate that combines the X and Z gates with a phase factor.
         -> Z (Pauli-Z Gate): a single-qubit gate that applies a phase shift of π to the state ∣1⟩.
-        -> CNOT_2q Gate (most common Controlled-X Gate): a 2-qubit gate that flips the second qubit (target) if the first qubit (control) is ∣1⟩.
         -> CNOT_nq Gate (Controlled-X Gate for n qubits): generates a CNOT gate matrix for n qubits with multiple control qubits.
-                    parameters: n (int): Total number of qubits.
+                    parameters: n (int): Total number of qubits of the circuit.
                                 control_qubits (list[int]): List of indices for the control qubits (0-indexed).
                                 target_qubit (int): Index of the target qubit (0-indexed).
                     returns: np.ndarray: The multi-control CNOT gate matrix of size 2^n x 2^n.
