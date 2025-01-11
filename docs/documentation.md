@@ -49,7 +49,7 @@ Quantum Simulation Library contains:
         -> X (Pauli-X Gate): a single-qubit gate equivalent to a classical NOT gate (flips ∣0⟩ to ∣1⟩ and vice versa).
         -> Y (Pauli-Y Gate): a single-qubit gate that combines the X and Z gates with a phase factor.
         -> Z (Pauli-Z Gate): a single-qubit gate that applies a phase shift of π to the state ∣1⟩.
-        -> CNOT_nq Gate (Controlled-X Gate for n qubits): generates a CNOT gate matrix for n qubits with multiple control qubits.
+        -> CNOT Gate (Controlled-X Gate for n qubits): generates a CNOT gate matrix for n qubits with multiple control qubits.
                     parameters: n (int): Total number of qubits of the circuit.
                                 control_qubits (list[int]): List of indices for the control qubits (0-indexed).
                                 target_qubit (int): Index of the target qubit (0-indexed).
