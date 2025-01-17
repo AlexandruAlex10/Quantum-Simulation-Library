@@ -85,5 +85,27 @@ class TestQuantumSimulationCircuit(unittest.TestCase):
         expected_state[20] = 1 # |10100>
         self.assertTrue(np.allclose(qc.state, expected_state))
 
+    def test_full_simulation_4(self):
+        qc = QuantumCircuit(num_qubits=5)
+        qc.add_gate(X, [0])
+        qc.add_gate(X, [1])
+        qc.add_gate(X, [2])
+        qc.add_gate(X, [3])
+        qc.add_gate(X, [4])
+        qc.add_gate(CNOT(5,[0,1,2,3],4), [0,1,2,3,4])
+        qc.add_gate(X, [4])
+        qc.add_gate(CNOT(5,[0],1), [0,1])
+        qc.add_gate(CNOT(5,[2],3), [2,3])
+        # qc.add_gate(CNOT(5,[4],3), [3,4]) # it should not change, but it changes
+        qc.add_gate(CNOT(5,[4],2), [2,4]) # this works
+        # qc.add_gate(CNOT(5,[4],1), [1,4]) # it should not change, but it changes
+        qc.add_gate(CNOT(5,[4],0), [0,4]) # this works
+        qc.simulate()
+        expected_state = np.zeros(2**5, dtype=complex)
+        expected_state[1] = 1 # |00001>
+        print(qc.state)
+        print(expected_state)
+        self.assertTrue(np.allclose(qc.state, expected_state))
+
 if __name__ == "__main__":
     unittest.main()

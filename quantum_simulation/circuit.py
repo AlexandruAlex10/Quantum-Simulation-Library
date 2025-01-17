@@ -1,5 +1,6 @@
 import numpy as np
 from .measurements import measure
+from .gates import I
 
 class QuantumCircuit:
     """
@@ -47,8 +48,11 @@ class QuantumCircuit:
         The `apply_gate` method in the `QuantumCircuit` class is responsible for applying a
         specified quantum gate operation to the quantum state vector of the circuit.
         """
+        if len(qubits) == 1:
+            full_gate = self.expand_gate(gate, qubits)
+        else:
+            full_gate = gate
 
-        full_gate = self.expand_gate(gate, qubits)
         self.state = full_gate @ self.state # Matrix multiplication in numpy
 
     def expand_gate(self, gate, qubits):
@@ -58,19 +62,13 @@ class QuantumCircuit:
         """
 
         num_qubits = self.num_qubits
-        dim = 2**num_qubits
-
-        if gate.shape == (dim, dim): # If the gate is already full-sized, return it directly
-            return gate
-
-        identity = np.eye(2, dtype=complex)
         full_gate = 1
 
         for i in range(num_qubits):
             if i in qubits:
                 full_gate = np.kron(full_gate, gate)
             else:
-                full_gate = np.kron(full_gate, identity)
+                full_gate = np.kron(full_gate, I)
 
         return full_gate
 

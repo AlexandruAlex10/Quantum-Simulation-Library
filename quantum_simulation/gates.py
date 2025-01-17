@@ -79,6 +79,9 @@ def CNOT(n, control, target):
     if target in control:
         raise ValueError("Target qubit cannot be one of the control qubits.")
 
+    if not ((max(control) < target) or (target < min(control))):
+        raise ValueError("Invalid CNOT gate.")
+
     num_states = 2 ** n
     cnot_matrix = np.eye(num_states, dtype=complex)
 
