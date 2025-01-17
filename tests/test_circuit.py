@@ -96,13 +96,13 @@ class TestQuantumSimulationCircuit(unittest.TestCase):
         qc.add_gate(X, [4])
         qc.add_gate(CNOT(5,[0],1), [0,1])
         qc.add_gate(CNOT(5,[2],3), [2,3])
-        # qc.add_gate(CNOT(5,[4],3), [3,4]) # it should not change, but it changes
-        qc.add_gate(CNOT(5,[4],2), [2,4]) # this works
-        # qc.add_gate(CNOT(5,[4],1), [1,4]) # it should not change, but it changes
-        qc.add_gate(CNOT(5,[4],0), [0,4]) # this works
+        qc.add_gate(CNOT(5,[4],3), [3,4]) 
+        qc.add_gate(CNOT(5,[4],2), [2,4])
+        qc.add_gate(CNOT(5,[4],1), [1,4])
+        qc.add_gate(CNOT(5,[4],0), [0,4])
         qc.simulate()
         expected_state = np.zeros(2**5, dtype=complex)
-        expected_state[1] = 1 # |00001>
+        expected_state[11] = 1 # |01011>
         print(qc.state)
         print(expected_state)
         self.assertTrue(np.allclose(qc.state, expected_state))
